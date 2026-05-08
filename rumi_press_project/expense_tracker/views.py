@@ -27,6 +27,9 @@ def login_view(request):
         login(request, form.get_user())
         messages.success(request, 'Logged in successfully.')
         return redirect('home')
+    
+    if not form.is_valid():
+        messages.error(request, "Invalid username or password.") 
 
     return render(request, 'login.html', {'form': form})
 
