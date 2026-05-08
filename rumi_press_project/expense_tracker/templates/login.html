@@ -4,7 +4,7 @@
 
 {% block content %}
     <h2>Login</h2>
-    <form method="post">
+    <form method="post" action="{% url 'login' %}">     <!--they can operate without the action att if the same view handles both POST and GET-->
         {% csrf_token %}
         {{ form.as_p }}
         <div class="form-actions">
