@@ -23,13 +23,13 @@ def login_view(request):
         return redirect('home')
 
     form = AuthenticationForm(request, data=request.POST or None)
-    if request.method == 'POST' and form.is_valid():
-        login(request, form.get_user())
-        messages.success(request, 'Logged in successfully.')
-        return redirect('home')
-    
-    if not form.is_valid():
-        messages.error(request, "Invalid username or password.") 
+    if request.method == 'POST':
+        if form.is_valid():
+            login(request, form.get_user())
+            messages.success(request, 'Logged in successfully.')
+            return redirect('home')
+        else:
+            messages.error(request, "Invalid username or password.")
 
     return render(request, 'login.html', {'form': form})
 
